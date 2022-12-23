@@ -1,11 +1,18 @@
 import { Flex, Heading } from '@chakra-ui/react';
+import { withTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 
-const Page1 = () => {
+const Page1 = ({ t }) => {
+    console.log(t);
     return (
         <Flex width="100%" height="100vh" justify="center" align="center">
-            <Heading>Hello good peoples, Welcome to Page1!</Heading>
+            <Heading>{t('page1.welcomeText')}</Heading>
         </Flex>
     );
 };
 
-export default Page1;
+Page1.propTypes = {
+    t: PropTypes.func.isRequired,
+};
+
+export default withTranslation()(Page1);
