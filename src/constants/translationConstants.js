@@ -9,7 +9,10 @@ export const resources = {
                 submit: 'Sumbit',
             },
             page1: {
-                welcomeText: 'Hello good peoples, Welcome to page1!',
+                welcomeText: 'Hello good peoples, Welcome to login page!',
+            },
+            page2: {
+                welcomeText: 'Hello good peoples, Welcome to home page!',
             },
         },
     },
