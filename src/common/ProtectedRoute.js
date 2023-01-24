@@ -5,13 +5,15 @@ import Menubar from './Menubar';
 import { Box, Show, Hide } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 import MobileMenubar from './MobileMenubar';
+import { TOKEN_KEY } from '../constants/basicConstants';
 
 function ProtectedRoute({ children }) {
     const email = 'noyon@exabyting.com';
     const [authed] = useState(email !== null);
-    const [user] = useState(email);
 
-    if (!user) return <Navigate to="/login" replace />;
+    if (authed === true && localStorage.getItem(TOKEN_KEY)) {
+        location.reload();
+    }
 
     return (
         <>
@@ -19,11 +21,10 @@ function ProtectedRoute({ children }) {
                 <>
                     <Navbar />
                     <Box h="100vh" display="flex" overflow="hidden">
-                        {/* <Sidebar /> */}
                         <Show above="md">
                             <Menubar />
                         </Show>
-                        {/* main content */}
+
                         <Box
                             w="full"
                             pt={4}
@@ -34,7 +35,7 @@ function ProtectedRoute({ children }) {
                             {children}
                         </Box>
                     </Box>
-                    {/* <MobileNav></MobileNav> */}
+
                     <Hide above="md">
                         <MobileMenubar />
                     </Hide>

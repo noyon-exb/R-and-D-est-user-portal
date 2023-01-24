@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { token_key } from '../constants/basicConstants';
+import { TOKEN_KEY } from '../constants/basicConstants';
 
 //TODO: will change for every project
 const API_URL = 'PUT_A_SERVER_URL_HERE!';
@@ -12,7 +12,7 @@ const Service = axios.create({
 });
 
 Service.interceptors.request.use(config => {
-    const token = localStorage.getItem(token_key);
+    const token = localStorage.getItem(TOKEN_KEY);
     config.headers.token = token ? token : '';
     return config;
 });
