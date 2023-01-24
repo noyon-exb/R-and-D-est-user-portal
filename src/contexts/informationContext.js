@@ -1,22 +1,27 @@
 import React from 'react';
+import {
+    CLEAR_INFORMATION,
+    UNSUPPORTED_ACTION_TYPE,
+} from '../constants/actionTypeConstant';
+import { INFORMATION } from '../constants/basicConstants';
 
 const InformationContext = React.createContext();
 
 function informationReducer(state, action) {
     switch (action.type) {
-        case 'CLEAR_INFORMATION': {
-            localStorage.removeItem('information');
+        case CLEAR_INFORMATION: {
+            localStorage.removeItem(INFORMATION);
             return { ...initialState };
         }
         default: {
-            throw new Error(`Unsupported action type: ${action.type}`);
+            throw new Error(`${UNSUPPORTED_ACTION_TYPE} ${action.type}`);
         }
     }
 }
 
 const initialState = {};
 
-const localState = JSON.parse(localStorage.getItem('information'));
+const localState = JSON.parse(localStorage.getItem(INFORMATION));
 
 function InformationProvider(props) {
     const [state, dispatch] = React.useReducer(
@@ -25,7 +30,7 @@ function InformationProvider(props) {
     );
 
     React.useEffect(() => {
-        localStorage.setItem('information', JSON.stringify(state));
+        localStorage.setItem(INFORMATION, JSON.stringify(state));
     }, [state]);
     const value = React.useMemo(() => [state, dispatch], [state]);
     return <InformationContext.Provider value={value} {...props} />;
