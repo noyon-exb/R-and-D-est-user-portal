@@ -1,0 +1,52 @@
+{
+    "title": "login",
+    "type": "form",
+    "properties": [
+        {
+            "id": "userEmail",
+            "inputType": "inputBox",
+            "textType": "email",
+            "label": "User email",
+            "placeholder": "please Enter you email",
+            "dataValidation": {
+                "required": "Email is required",
+                "pattern": {
+                    "value": "^([a-z0-9+]+@[a-z]+\\.[a-z]{2,3})$",
+                    "message": "Invalid email"
+                }
+            },
+            "validate": true,
+            "value": "noyon@exabyting.com"
+        },
+        {
+            "id": "userName",
+            "inputType": "inputBox",
+            "textType": "text",
+            "label": "User name",
+            "placeholder": "please Enter you name",
+            "dataValidation": {
+                "required": "Name is required",
+                "pattern": {
+                    "value": "^[ a-zA-Z-']+$",
+                    "message": "Invalid name"
+                },
+                "minLength": {
+                    "value": 5,
+                    "message": "Name should be in between 5 to 10 characters"
+                },
+                "maxLength": {
+                    "value": 10,
+                    "message": "Name should be in between 5 to 10 characters"
+                }
+            },
+            "validate": true,
+            "value": "noyon"
+        },
+        {
+            "id": "adminNameDropDown",
+            "inputType": "dropdown",
+            "label": "User list",
+            "values": null
+        }
+    ]
+}

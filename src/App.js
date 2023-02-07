@@ -1,38 +1,40 @@
 import { Route, Routes } from 'react-router-dom';
 import Page1 from './TestReactRouter/Page1';
-import Page2 from './TestReactRouter/Page2';
+import LoginContainer from './schema/container/LoginContainer';
+import LoginPerviewContainer from './schema/container/LoginPerviewContainer';
+import { useInformation } from './contexts/informationContext';
+import { useEffect } from 'react';
+import CompanyDetailsContainer from './schema/container/CompanyDetailsContainer';
 import ProtectedRoute from './common/ProtectedRoute';
 
 function App() {
+    const { dispatch } = useInformation();
+
+    useEffect(() => {
+        var loginJsonSchema = require('./schema/form.json');
+        dispatch({ type: 'FORM_SCHEEMA_JSON', payload: loginJsonSchema });
+
+        var companyDetailsJsonSchema = require('./schema/companyDetails.json');
+        dispatch({
+            type: 'COMPANY_DETAILS_JSON_SCHEMA',
+            payload: companyDetailsJsonSchema,
+        });
+    }, []);
     return (
         <Routes>
             <Route exact path="/" element={<Page1 />} />
-            <Route exact path="/page1" element={<Page1 />} />
-            <Route path="/page2" element={<Page2 />} />
-            <Route
-                path="/demo1"
-                element={
-                    <ProtectedRoute>
-                        <Page1 />
-                    </ProtectedRoute>
-                }
-            />
-            <Route
-                path="/demo2"
-                element={
-                    <ProtectedRoute>
-                        <Page1 />
-                    </ProtectedRoute>
-                }
-            />
-            <Route
-                path="/user-management"
-                element={
-                    <ProtectedRoute>
-                        <Page1 />
-                    </ProtectedRoute>
-                }
-            />
+            <Route path="/*" element={<ProtectedRoute />}>
+                <Route path="login" element={<LoginContainer />} />
+                <Route
+                    path="company-details"
+                    element={<CompanyDetailsContainer />}
+                />
+
+                <Route
+                    path="loginPreview"
+                    element={<LoginPerviewContainer />}
+                />
+            </Route>
         </Routes>
     );
 }

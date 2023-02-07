@@ -9,6 +9,12 @@ const InformationContext = React.createContext();
 
 function informationReducer(state, action) {
     switch (action.type) {
+        case 'FORM_SCHEEMA_JSON': {
+            return { ...state, dynamicDesignJson: action.payload };
+        }
+        case 'COMPANY_DETAILS_JSON_SCHEMA': {
+            return { ...state, companyDetailsJsonSchema: action.payload };
+        }
         case CLEAR_INFORMATION: {
             localStorage.removeItem(INFORMATION);
             return { ...initialState };
@@ -19,7 +25,10 @@ function informationReducer(state, action) {
     }
 }
 
-const initialState = {};
+const initialState = {
+    dynamicDesignJson: null,
+    companyDetailsJsonSchema: null,
+};
 
 const localState = JSON.parse(localStorage.getItem(INFORMATION));
 

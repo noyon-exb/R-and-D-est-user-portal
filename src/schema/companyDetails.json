@@ -1,0 +1,144 @@
+{
+    "title": "companyDetails",
+    "totalPages": 2,
+    "totalQuestion": 10,
+    "type": "form",
+    "properties": [
+        {
+            "id": "companyName",
+            "serial": 1,
+            "type": "input",
+            "textType": "text",
+            "heading": "Company Legal Name",
+            "description": "Please state the ownership nature and legal form of your company",
+            "placeholder": "Company legal name",
+            "hasTooltip": false,
+            "tooltipText": null,
+            "defaultValue": null,
+            "value": null
+        },
+        {
+            "id": "businessName",
+            "serial": 2,
+            "type": "input",
+            "textType": "text",
+            "heading": "Company known trading/business name",
+            "description": "Please provide the commonly known name of your company. This can be your company initials too, if this is more known in your trading",
+            "placeholder": "Company Known Trading/Business Name",
+            "hasTooltip": true,
+            "tooltipText": "Note: This is tooltip Text"
+        },
+        {
+            "id": "ownershipAndLegalForm",
+            "serial": 3,
+            "type": "input",
+            "textType": "text",
+            "heading": "Nature Of Ownership And Legal Form",
+            "description": "Please state the ownership nature and legal form of your company",
+            "placeholder": "Nature of ownership and legal form",
+            "hasTooltip": true,
+            "tooltipText": "Note: This is tooltip Text"
+        },
+        {
+            "id": "companyHeadquarterLocation",
+            "serial": 4,
+            "type": "input",
+            "textType": "text",
+            "heading": "Company Headquarter Location",
+            "description": "Please enter the location of the company headquarter",
+            "placeholder": "Company headquarter location",
+            "hasTooltip": true,
+            "tooltipText": "Note: This is tooltip Text"
+        },
+        {
+            "id": "countriesOperation",
+            "serial": 5,
+            "type": "input",
+            "textType": "text",
+            "heading": "Countries Of Operation",
+            "description": "Please state all the countries where the company operates",
+            "placeholder": "Countries of operation",
+            "hasTooltip": true,
+            "tooltipText": "Note: This is tooltip Text"
+        },
+        {
+            "id": "organizationEntities",
+            "serial": 6,
+            "type": "input",
+            "textType": "text",
+            "heading": "Organization Entities",
+            "description": "List all organization entities included in its sustainability reporting",
+            "placeholder": "organization entities",
+            "hasTooltip": true,
+            "tooltipText": "Note: This is tooltip Text"
+        },
+        {
+            "id": "performanceIndicator",
+            "type": "xyz",
+            "indicators": [
+                {
+                    "id": 1,
+                    "userAdded": false,
+                    "selected": false,
+                    "key": "Total Employee1",
+                    "value": "Number1"
+                },
+                {
+                    "id": 2,
+                    "userAdded": false,
+                    "selected": false,
+                    "key": "Total Employee2",
+                    "value": "Number2"
+                }
+            ],
+            "isExtendable": true,
+            "extendableComponent": {
+                "title": "Others",
+                "type": "button"
+            }
+        }
+    ],
+    "data": [
+        {
+            "id": "companyHeadquarterLocation",
+            "type": "obejct",
+            "value": {}
+        },
+        {
+            "id": "countriesOperation",
+            "type": "array",
+            "value": []
+        },
+        {
+            "id": "organizationEntities",
+            "type": "string",
+            "value": "xyz"
+        },
+        {
+            "id": "performanceIndicator",
+            "type": "array",
+            "value": [
+                {
+                    "id": 1,
+                    "userAdded": false,
+                    "selected": true,
+                    "key": "Total Employee 1",
+                    "value": "Number1"
+                },
+                {
+                    "id": 2,
+                    "userAdded": false,
+                    "key": "Total Employee 2",
+                    "value": "Number2"
+                },
+                {
+                    "id": 3,
+                    "userAdded": true,
+                    "selected": true,
+                    "key": "Total Employee 3",
+                    "value": "Number3"
+                }
+            ]
+        }
+    ]
+}
