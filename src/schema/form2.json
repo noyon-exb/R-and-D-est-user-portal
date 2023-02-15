@@ -1,6 +1,6 @@
 {
-    "title": "Company Details",
-    "formId": 1,
+    "title": "Form 2",
+    "formId": 2,
     "questionPerPage": 3,
     "type": "form",
     "properties": [
@@ -14,7 +14,7 @@
             "placeholder": "Company legal name",
             "hasTooltip": false,
             "tooltipText": null,
-            "defaultValue": null, 
+            "defaultValue": null,
             "value": null
         },
         {
@@ -28,58 +28,6 @@
             "hasTooltip": true,
             "tooltipText": "Note: This is tooltip Text",
             "defaultValue": null,
-            "value": null
-        },
-        {
-            "id": "ownershipAndLegalForm",
-            "serial": 3,
-            "type": "input",
-            "textType": "text",
-            "heading": "Nature Of Ownership And Legal Form",
-            "description": "Please state the ownership nature and legal form of your company",
-            "placeholder": "Nature of ownership and legal form",
-            "hasTooltip": true,
-            "tooltipText": "Note: This is tooltip Text",
-            "defaultValue": null,
-            "value": null
-        },
-        {
-            "id": "companyHeadquarterLocation",
-            "serial": 4,
-            "type": "input",
-            "textType": "text",
-            "heading": "Company Headquarter Location",
-            "description": "Please enter the location of the company headquarter",
-            "placeholder": "Company headquarter location",
-            "hasTooltip": true,
-            "tooltipText": "Note: This is tooltip Text",
-            "defaultValue": null,
-            "value": null
-        },
-        {
-            "id": "countriesOperation",
-            "serial": 5,
-            "type": "input",
-            "textType": "text",
-            "heading": "Countries Of Operation",
-            "description": "Please state all the countries where the company operates",
-            "placeholder": "Countries of operation",
-            "hasTooltip": true,
-            "tooltipText": "Note: This is tooltip Text",
-            "defaultValue": null,
-            "value": null
-        },
-        {
-            "id": "organizationEntities",
-            "serial": 6,
-            "type": "input",
-            "textType": "text",
-            "heading": "Organization Entities",
-            "description": "List all organization entities included in its sustainability reporting",
-            "placeholder": "organization entities",
-            "hasTooltip": true,
-            "tooltipText": "Note: This is tooltip Text",
-            "defaultValue": "zyd",
             "value": null
         }
     ],

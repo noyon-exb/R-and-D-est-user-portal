@@ -1,32 +1,39 @@
 import { Button, Flex } from '@chakra-ui/react';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useInformation } from '../../contexts/informationContext';
 import InputField from '../component/InputField';
-import PerformanceIndiator from '../component/PerformanceIndiator';
+import PropTypes from 'prop-types';
 
-export default function CompanyDetailsContainer() {
-    const {
-        state: { companyDetailsJsonSchema },
-    } = useInformation();
-    const components = companyDetailsJsonSchema.properties;
+function FormContainer({ jsonSchema }) {
+    const components = jsonSchema.properties;
 
     const {
         handleSubmit,
         register,
-        setValue,
         formState: { isValid },
     } = useForm({
         mode: 'all',
     });
 
     const onSubmit = values => {
-        console.log(values);
+        //console.log(values);
         let requestObject = {};
+        //no need this map
         components.map(data => {
             requestObject[data.id] = values[data.id];
         });
-        console.log('requestObject: ', requestObject);
+        //console.log('requestObject: ', requestObject);
+        let newObject = components;
+        for (let component of components) {
+            //console.log('components: ', component);
+            for (let val in values) {
+                if (val === component.id) {
+                    component.value = values[val];
+                }
+                newObject[component.serial - 1] = component;
+            }
+        }
+        console.log(newObject);
     };
     return (
         <Flex w="100%" h="100vh" direction="column" px="10%" my="50px">
@@ -40,19 +47,21 @@ export default function CompanyDetailsContainer() {
                                 register={register}
                             />
                         );
-                    } else if (component.type === 'xyz') {
-                        return (
-                            <PerformanceIndiator
-                                key={index}
-                                component={component}
-                                setValue={setValue}
-                            />
-                        );
                     }
+                    // else if (component.type === 'xyz') {
+                    //     return (
+                    //         <PerformanceIndiator
+                    //             key={index}
+                    //             component={component}
+                    //             setValue={setValue}
+                    //         />
+                    //     );
+                    // }
                 })}
 
                 <Button
                     type="submit"
+                    float="right"
                     mt="30px"
                     w="100px"
                     bg="#e2136e"
@@ -71,3 +80,9 @@ export default function CompanyDetailsContainer() {
         </Flex>
     );
 }
+
+FormContainer.propTypes = {
+    jsonSchema: PropTypes.object,
+};
+
+export default FormContainer;

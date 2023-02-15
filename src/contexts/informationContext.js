@@ -15,6 +15,9 @@ function informationReducer(state, action) {
         case 'COMPANY_DETAILS_JSON_SCHEMA': {
             return { ...state, companyDetailsJsonSchema: action.payload };
         }
+        case 'FORM_2_JSON_SCHEMA': {
+            return { ...state, form2JsonSchema: action.payload };
+        }
         case CLEAR_INFORMATION: {
             localStorage.removeItem(INFORMATION);
             return { ...initialState };
@@ -28,6 +31,7 @@ function informationReducer(state, action) {
 const initialState = {
     dynamicDesignJson: null,
     companyDetailsJsonSchema: null,
+    form2JsonSchema: null,
 };
 
 const localState = JSON.parse(localStorage.getItem(INFORMATION));

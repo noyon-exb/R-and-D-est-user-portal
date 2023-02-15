@@ -1,11 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
 import Page1 from './TestReactRouter/Page1';
-import LoginContainer from './schema/container/LoginContainer';
-import LoginPerviewContainer from './schema/container/LoginPerviewContainer';
 import { useInformation } from './contexts/informationContext';
 import { useEffect } from 'react';
-import CompanyDetailsContainer from './schema/container/CompanyDetailsContainer';
 import ProtectedRoute from './common/ProtectedRoute';
+import SelectJSONSchema from './schema/container/SelectJSONSchema';
 
 function App() {
     const { dispatch } = useInformation();
@@ -19,20 +17,20 @@ function App() {
             type: 'COMPANY_DETAILS_JSON_SCHEMA',
             payload: companyDetailsJsonSchema,
         });
+
+        var form2JsonSchema = require('./schema/form2.json');
+        dispatch({
+            type: 'FORM_2_JSON_SCHEMA',
+            payload: form2JsonSchema,
+        });
     }, []);
     return (
         <Routes>
-            <Route exact path="/" element={<Page1 />} />
             <Route path="/*" element={<ProtectedRoute />}>
-                <Route path="login" element={<LoginContainer />} />
+                <Route exact path="" element={<Page1 />} />
                 <Route
-                    path="company-details"
-                    element={<CompanyDetailsContainer />}
-                />
-
-                <Route
-                    path="loginPreview"
-                    element={<LoginPerviewContainer />}
+                    path="company-details/:formId"
+                    element={<SelectJSONSchema />}
                 />
             </Route>
         </Routes>

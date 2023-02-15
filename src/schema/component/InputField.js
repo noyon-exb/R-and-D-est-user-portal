@@ -33,7 +33,7 @@ function InputField({ component, register }) {
                         autoComplete="off"
                         name={component.id}
                         type={component.textType}
-                        //defaultValue={data.value}
+                        defaultValue={component.defaultValue}
                         placeholder={component.placeholder}
                         _placeholder={{
                             fontSize: '14px',
