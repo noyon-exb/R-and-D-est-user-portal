@@ -1,12 +1,14 @@
 import { Button, Flex } from '@chakra-ui/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import InputField from '../component/InputField';
 import PropTypes from 'prop-types';
 
 function FormContainer({ jsonSchema }) {
     const components = jsonSchema.properties;
-    let page = 1;
+    const questionPerPage = jsonSchema.questionPerPage;
+    const totalQuestion = jsonSchema.properties.length;
+    const [pageNo, setPageNo] = useState(0);
 
     const {
         handleSubmit,
@@ -36,14 +38,23 @@ function FormContainer({ jsonSchema }) {
         console.log(newObject);
     };
 
+    const increasePageNoHandler = () => {
+        setPageNo(prev => prev + 1);
+    };
+
+    const decreasePageNoHandler = () => {
+        setPageNo(prev => prev - 1);
+    };
+
+    //useEffect(() => {}, [pageNo]);
+
     return (
         <Flex w="100%" h="100vh" direction="column" px="10%" my="50px">
             <form onSubmit={handleSubmit(onSubmit)}>
                 {components.map((component, index) => {
-                    const questionPerPage = jsonSchema.questionPerPage;
                     if (
-                        index >= page * questionPerPage &&
-                        index <= page * questionPerPage + questionPerPage - 1
+                        index >= pageNo * questionPerPage &&
+                        index <= pageNo * questionPerPage + questionPerPage - 1
                     ) {
                         if (component.type === 'input') {
                             return (
@@ -57,23 +68,65 @@ function FormContainer({ jsonSchema }) {
                     }
                 })}
 
-                <Button
-                    type="submit"
-                    float="right"
-                    mt="30px"
-                    w="100px"
-                    bg="#e2136e"
-                    color="#FFF"
-                    disabled={!isValid}
-                    _disabled={{
-                        cursor: 'not-allowed',
-                        bg: '#D1D5DB',
-                        color: '#111111',
-                    }}
-                    _hover={{ bg: '81C494 !important' }}
-                >
-                    Save Sumbit
-                </Button>
+                {pageNo > 0 ? (
+                    <Button
+                        type="submit"
+                        mt="30px"
+                        mr="10px"
+                        w="100px"
+                        bg="gray.400"
+                        color="#FFF"
+                        disabled={!isValid}
+                        _disabled={{
+                            cursor: 'not-allowed',
+                            bg: '#D1D5DB',
+                            color: '#111111',
+                        }}
+                        _hover={{ bg: '81C494 !important' }}
+                        onClick={decreasePageNoHandler}
+                    >
+                        Previous page
+                    </Button>
+                ) : null}
+
+                {pageNo >= 0 &&
+                (pageNo + 1) * questionPerPage <
+                    totalQuestion - (totalQuestion % questionPerPage) + 1 ? (
+                    <Button
+                        type="submit"
+                        mt="30px"
+                        w="100px"
+                        bg="blue"
+                        color="#FFF"
+                        disabled={!isValid}
+                        _disabled={{
+                            cursor: 'not-allowed',
+                            bg: '#D1D5DB',
+                            color: '#111111',
+                        }}
+                        _hover={{ bg: '81C494 !important' }}
+                        onClick={increasePageNoHandler}
+                    >
+                        Next page
+                    </Button>
+                ) : (
+                    <Button
+                        type="submit"
+                        mt="30px"
+                        w="100px"
+                        bg="#e2136e"
+                        color="#FFF"
+                        disabled={!isValid}
+                        _disabled={{
+                            cursor: 'not-allowed',
+                            bg: '#D1D5DB',
+                            color: '#111111',
+                        }}
+                        _hover={{ bg: '81C494 !important' }}
+                    >
+                        Save Sumbit
+                    </Button>
+                )}
             </form>
         </Flex>
     );
