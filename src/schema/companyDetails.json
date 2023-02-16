@@ -81,6 +81,19 @@
             "tooltipText": "Note: This is tooltip Text",
             "defaultValue": "zyd",
             "value": null
+        },
+        {
+            "id": "organizationEntities",
+            "serial": 7,
+            "type": "input",
+            "textType": "text",
+            "heading": "Organization Entities",
+            "description": "List all organization entities included in its sustainability reporting",
+            "placeholder": "organization entities",
+            "hasTooltip": true,
+            "tooltipText": "Note: This is tooltip Text",
+            "defaultValue": "zyd",
+            "value": null
         }
     ],
     "data": [

@@ -16,7 +16,18 @@ const SelectJSONSchema = () => {
                 break;
             } else setSelectedJsonSchema(null);
         }
+        // step 1: if the schema already in context (checked formId), then go to final step 5.
+        // step 2: check local storage with formID if found then goto 3rd step otherwise step 2
+        // step 3: api call with formId if not found in localStorage, then save schema into localStorage
+        // step 4: save schema into context
+        // step 5: end
     }, [selectedJsonSchema, formId]);
+
+    useEffect(() => {
+        // step 1: get form data depends on formId
+        // step 2: mapping get form data with jsonSchema
+    }, [formId]);
+
     return (
         <Box>
             {selectedJsonSchema ? (

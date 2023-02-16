@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 function FormContainer({ jsonSchema }) {
     const components = jsonSchema.properties;
+    let page = 1;
 
     const {
         handleSubmit,
@@ -16,16 +17,15 @@ function FormContainer({ jsonSchema }) {
     });
 
     const onSubmit = values => {
-        //console.log(values);
+        console.log(values);
         let requestObject = {};
         //no need this map
         components.map(data => {
             requestObject[data.id] = values[data.id];
         });
-        //console.log('requestObject: ', requestObject);
+
         let newObject = components;
         for (let component of components) {
-            //console.log('components: ', component);
             for (let val in values) {
                 if (val === component.id) {
                     component.value = values[val];
@@ -35,28 +35,26 @@ function FormContainer({ jsonSchema }) {
         }
         console.log(newObject);
     };
+
     return (
         <Flex w="100%" h="100vh" direction="column" px="10%" my="50px">
             <form onSubmit={handleSubmit(onSubmit)}>
                 {components.map((component, index) => {
-                    if (component.type === 'input') {
-                        return (
-                            <InputField
-                                key={index}
-                                component={component}
-                                register={register}
-                            />
-                        );
+                    const questionPerPage = jsonSchema.questionPerPage;
+                    if (
+                        index >= page * questionPerPage &&
+                        index <= page * questionPerPage + questionPerPage - 1
+                    ) {
+                        if (component.type === 'input') {
+                            return (
+                                <InputField
+                                    key={index}
+                                    component={component}
+                                    register={register}
+                                />
+                            );
+                        }
                     }
-                    // else if (component.type === 'xyz') {
-                    //     return (
-                    //         <PerformanceIndiator
-                    //             key={index}
-                    //             component={component}
-                    //             setValue={setValue}
-                    //         />
-                    //     );
-                    // }
                 })}
 
                 <Button
