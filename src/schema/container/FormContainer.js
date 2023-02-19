@@ -26,16 +26,36 @@ function FormContainer({ jsonSchema }) {
             requestObject[data.id] = values[data.id];
         });
 
-        let newObject = components;
+        // let newObject = components;
+        // for (let component of components) {
+        //     for (let val in values) {
+        //         if (val === component.id) {
+        //             component.value = values[val];
+        //         }
+        //         newObject[component.serial - 1] = component;
+        //     }
+        // }
+        // //console.log(newObject);
+
+        let serverRequestPayload = { data: [] };
+
         for (let component of components) {
-            for (let val in values) {
-                if (val === component.id) {
-                    component.value = values[val];
+            for (let key in values) {
+                if (key === component.id) {
+                    // serverRequestPayload.data = {
+                    //     ...serverRequestPayload.data,
+                    //     key: values[key],
+                    // };
+
+                    serverRequestPayload.data.push({
+                        id: key,
+                        value: values[key],
+                    });
                 }
-                newObject[component.serial - 1] = component;
             }
         }
-        console.log(newObject);
+
+        console.log(serverRequestPayload);
     };
 
     const increasePageNoHandler = () => {

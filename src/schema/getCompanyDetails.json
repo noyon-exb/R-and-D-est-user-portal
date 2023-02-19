@@ -1,0 +1,32 @@
+{
+    "data": [
+        {
+            "id": "companyName",
+            "value": 1
+        },
+        {
+            "id": "businessName",
+            "value": 2
+        },
+        {
+            "id": "ownershipAndLegalForm",
+            "value": null
+        },
+        {
+            "id": "companyHeadquarterLocation",
+            "value": 4
+        },
+        {
+            "id": "countriesOperation",
+            "value": null
+        },
+        {
+            "id": "organizationEntities",
+            "value": 6
+        },
+        {
+            "id": "organizationEntities2",
+            "value": null
+        }
+    ]
+}

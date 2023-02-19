@@ -9,7 +9,7 @@ const MenubarData = [
     },
     {
         label: 'c',
-        path: '/company-details/3',
+        path: '/',
     },
     {
         label: 'd',

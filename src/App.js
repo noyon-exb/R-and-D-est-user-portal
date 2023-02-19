@@ -10,18 +10,26 @@ function App() {
 
     useEffect(() => {
         var loginJsonSchema = require('./schema/form.json');
-        dispatch({ type: 'FORM_SCHEEMA_JSON', payload: loginJsonSchema });
+        localStorage.setItem(
+            loginJsonSchema.formId,
+            JSON.stringify(loginJsonSchema)
+        );
 
         var companyDetailsJsonSchema = require('./schema/companyDetails.json');
-        dispatch({
-            type: 'COMPANY_DETAILS_JSON_SCHEMA',
-            payload: companyDetailsJsonSchema,
-        });
+        localStorage.setItem(
+            companyDetailsJsonSchema.formId,
+            JSON.stringify(companyDetailsJsonSchema)
+        );
 
         var form2JsonSchema = require('./schema/form2.json');
+        localStorage.setItem(
+            form2JsonSchema.formId,
+            JSON.stringify(form2JsonSchema)
+        );
+
         dispatch({
-            type: 'FORM_2_JSON_SCHEMA',
-            payload: form2JsonSchema,
+            type: 'FORM_SCHEEMA_JSON',
+            payload: companyDetailsJsonSchema,
         });
     }, []);
     return (

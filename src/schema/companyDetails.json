@@ -14,7 +14,7 @@
             "placeholder": "Company legal name",
             "hasTooltip": false,
             "tooltipText": null,
-            "defaultValue": null, 
+            "defaultValue": null,
             "value": null
         },
         {
@@ -79,7 +79,7 @@
             "placeholder": "organization entities",
             "hasTooltip": true,
             "tooltipText": "Note: This is tooltip Text",
-            "defaultValue": "zyd",
+            "defaultValue": null,
             "value": null
         },
         {
@@ -92,51 +92,8 @@
             "placeholder": "organization entities",
             "hasTooltip": true,
             "tooltipText": "Note: This is tooltip Text",
-            "defaultValue": "zyd",
+            "defaultValue": null,
             "value": null
-        }
-    ],
-    "data": [
-        {
-            "id": "companyHeadquarterLocation",
-            "type": "obejct",
-            "value": {}
-        },
-        {
-            "id": "countriesOperation",
-            "type": "array",
-            "value": []
-        },
-        {
-            "id": "organizationEntities",
-            "type": "string",
-            "value": "xyz"
-        },
-        {
-            "id": "performanceIndicator",
-            "type": "array",
-            "value": [
-                {
-                    "id": 1,
-                    "userAdded": false,
-                    "selected": true,
-                    "key": "Total Employee 1",
-                    "value": "Number1"
-                },
-                {
-                    "id": 2,
-                    "userAdded": false,
-                    "key": "Total Employee 2",
-                    "value": "Number2"
-                },
-                {
-                    "id": 3,
-                    "userAdded": true,
-                    "selected": true,
-                    "key": "Total Employee 3",
-                    "value": "Number3"
-                }
-            ]
         }
     ]
 }
