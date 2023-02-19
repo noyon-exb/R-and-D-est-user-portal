@@ -37,7 +37,7 @@ function App() {
             <Route path="/*" element={<ProtectedRoute />}>
                 <Route exact path="" element={<Page1 />} />
                 <Route
-                    path="company-details/:formId"
+                    path="form/company-details/:formId"
                     element={<SelectJSONSchema />}
                 />
             </Route>

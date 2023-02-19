@@ -1,19 +1,27 @@
+import { Image } from '@chakra-ui/react';
+import chartPie from '../assets/chart-pie.svg';
+
 const MenubarData = [
     {
-        label: 'a',
-        path: '/company-details/1',
-    },
-    {
-        label: 'b',
-        path: '/company-details/2',
-    },
-    {
-        label: 'c',
+        label: 'Home page',
+        lShow: 'Home page',
         path: '/',
+        color: '#FFFFFF',
+        icon: <Image src={chartPie} alt="menu bar icon" />,
     },
     {
-        label: 'd',
-        path: '/company-details/4',
+        label: 'ESG Dashboard',
+        lShow: 'ESG Dashboard/companyDetails',
+        path: '/form/company-details/1',
+        color: '#FFFFFF',
+        icon: <Image src={chartPie} alt="menu bar icon" />,
+    },
+    {
+        label: 'User Management',
+        lShow: 'User-management',
+        path: 'user-management',
+        color: '#FFFFFF',
+        icon: <Image src={chartPie} alt="menu bar icon" />,
     },
 ];
 
