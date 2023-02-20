@@ -6,10 +6,8 @@ import FormContainer from './FormContainer';
 
 const SelectJSONSchema = () => {
     const { formId } = useParams();
-    console.log(formId);
     const {
         state: { jsonSchema },
-        dispatch,
     } = useInformation();
     // useEffect(() => {
     //     // step 1: if the schema already in context (checked formId), then go to final step 5.
@@ -22,30 +20,29 @@ const SelectJSONSchema = () => {
     useEffect(() => {
         // step 1: get form data depends on formId
         // step 2: mapping get form data with jsonSchema
-        let newObject = jsonSchema;
-        var getServerResponseData = require('../getCompanyDetails.json');
-        dispatch({
-            type: 'FORM_SERVER_DATA',
-            payload: getServerResponseData,
-        });
-        console.log('hell');
-        for (let dataKey of getServerResponseData.data) {
-            for (const [index, schemaKey] of jsonSchema.properties.entries()) {
-                if (dataKey.id === schemaKey.id) {
-                    let x = jsonSchema.properties[index];
-                    x.defaultValue = dataKey.value;
-                    x.value = dataKey.value;
-                    newObject.properties[index] = x;
-                    break;
-                }
-            }
-        }
-        console.log(newObject);
-        dispatch({
-            type: 'FORM_SCHEEMA_JSON',
-            payload: newObject,
-        });
-    }, []);
+        // let newObject = jsonSchema;
+        // var getServerResponseData = require('../getCompanyDetails.json');
+        // console.log(getServerResponseData);
+        // dispatch({
+        //     type: 'FORM_SERVER_DATA',
+        //     payload: getServerResponseData,
+        // });
+        // for (let dataKey of getServerResponseData.data) {
+        //     for (const [index, schemaKey] of jsonSchema.properties.entries()) {
+        //         if (dataKey.id === schemaKey.id) {
+        //             let x = jsonSchema.properties[index];
+        //             x.defaultValue = dataKey.value;
+        //             x.value = dataKey.value;
+        //             newObject.properties[index] = x;
+        //             break;
+        //         }
+        //     }
+        // }
+        // dispatch({
+        //     type: 'FORM_SCHEEMA_JSON',
+        //     payload: newObject,
+        // });
+    }, [formId]);
 
     return (
         <Box>

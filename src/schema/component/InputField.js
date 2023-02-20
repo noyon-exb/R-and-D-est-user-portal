@@ -1,30 +1,16 @@
-import {
-    Box,
-    Flex,
-    FormControl,
-    FormLabel,
-    Heading,
-    Input,
-    Text,
-} from '@chakra-ui/react';
+import { Box, Flex, FormControl, FormLabel, Input } from '@chakra-ui/react';
 import React from 'react';
 import PropTypes from 'prop-types';
-import SerialNumber from './SerialNumber';
-import Tooltips from './Tooltips';
 
 function InputField({ component, register }) {
     return (
-        <Box py="10px">
-            <Flex direction="row">
-                <SerialNumber serialNo={component.serial} />
-                <Heading px="5px" fontSize="14px">
-                    {component.heading}
-                </Heading>
-                <Tooltips text={component.tooltipText} />
-            </Flex>
-            <Text fontSize="12px">{component.description}</Text>
+        <Box py="10px" pr="10px">
             <FormControl>
-                <FormLabel fontSize="14px" htmlFor={component.textType}>
+                <FormLabel
+                    fontSize="14px"
+                    htmlFor={component.textType}
+                    fontWeight={600}
+                >
                     {component.label ? component.label : null}
                 </FormLabel>
                 <Flex direction="column">
@@ -56,7 +42,7 @@ function InputField({ component, register }) {
 
 InputField.propTypes = {
     component: PropTypes.object.isRequired,
-    register: PropTypes.func.isRequired,
+    register: PropTypes.func,
 };
 
 export default InputField;
