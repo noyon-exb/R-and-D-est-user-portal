@@ -140,7 +140,7 @@ function FormContainer({ jsonSchema }) {
                                 (totalQuestion % questionPerPage) +
                                 1 ? (
                             <Button
-                                type="submit"
+                                //type="submit"
                                 mt="30px"
                                 mr="10px"
                                 w="133px"

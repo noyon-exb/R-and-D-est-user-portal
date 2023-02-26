@@ -15,6 +15,7 @@
             "gridValue": [
                 {
                     "id": "companyName/1",
+                    "index": 0,
                     "type": "input",
                     "textType": "text",
                     "columnSpan": 3,
@@ -35,6 +36,7 @@
             "gridValue": [
                 {
                     "id": "businessName/1",
+                    "index": 0,
                     "type": "input",
                     "textType": "text",
                     "columnSpan": 3,
@@ -55,6 +57,7 @@
             "gridValue": [
                 {
                     "id": "ownershipAndLegalForm/1",
+                    "index": 0,
                     "type": "input",
                     "textType": "text",
                     "columnSpan": 3,
@@ -75,6 +78,7 @@
             "gridValue": [
                 {
                     "id": "companyHeadquarterLocation/1",
+                    "index": 0,
                     "type": "input",
                     "textType": "text",
                     "columnSpan": 3,
@@ -95,6 +99,7 @@
             "gridValue": [
                 {
                     "id": "countriesOperation/1",
+                    "index": 0,
                     "type": "input",
                     "textType": "text",
                     "columnSpan": 3,
@@ -115,6 +120,7 @@
             "gridValue": [
                 {
                     "id": "organizationEntities/1",
+                    "index": 0,
                     "type": "input",
                     "textType": "text",
                     "columnSpan": 3,
@@ -135,6 +141,7 @@
             "gridValue": [
                 {
                     "id": "employeeValue/1",
+                    "index": 0,
                     "type": "input",
                     "textType": "text",
                     "columnSpan": 3,
@@ -144,6 +151,7 @@
                 },
                 {
                     "id": "employeeValue/2",
+                    "index": 1,
                     "type": "input",
                     "textType": "text",
                     "label": "Employee value description",
@@ -154,6 +162,7 @@
                 },
                 {
                     "id": "employeeValue/3",
+                    "index": 2,
                     "type": "input",
                     "textType": "text",
                     "label": "Employee value note",
@@ -164,6 +173,7 @@
                 },
                 {
                     "id": "employeeValue/4",
+                    "index": 3,
                     "type": "input",
                     "textType": "text",
                     "columnSpan": 2,
@@ -173,6 +183,7 @@
                 },
                 {
                     "id": "employeeValue/5",
+                    "index": 4,
                     "type": "input",
                     "textType": "text",
                     "columnSpan": 1,
@@ -189,12 +200,12 @@
             "description": "List of all grid",
             "hasTooltip": true,
             "tooltipText": "Note: This is tooltip Text",
-            "hasDimension": true,
             "col": 3,
             "gridValue": [
                 {
                     "id": "ShowGridValue/1",
-                    "type": "input",
+                    "index": 0,
+                    "type": "textarea",
                     "textType": "text",
                     "columnSpan": 3,
                     "placeholder": "organization entities",
@@ -203,6 +214,7 @@
                 },
                 {
                     "id": "ShowGridValue/2",
+                    "index": 1,
                     "type": "input",
                     "placeholder": "First name",
                     "label": "Select first name",
@@ -213,6 +225,7 @@
                 },
                 {
                     "id": "ShowGridValue/3",
+                    "index": 2,
                     "type": "input",
                     "placeholder": "Middle name",
                     "label": "Select middle name",
@@ -223,6 +236,7 @@
                 },
                 {
                     "id": "ShowGridValue/4",
+                    "index": 3,
                     "type": "input",
                     "placeholder": "Last name",
                     "label": "Select last name",
@@ -233,6 +247,7 @@
                 },
                 {
                     "id": "ShowGridValue/5",
+                    "index": 4,
                     "type": "input",
                     "placeholder": "Address",
                     "label": "Address",

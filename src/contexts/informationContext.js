@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     CLEAR_INFORMATION,
-    UNSUPPORTED_ACTION_TYPE,
+    //UNSUPPORTED_ACTION_TYPE,
 } from '../constants/actionTypeConstant';
 import { INFORMATION } from '../constants/basicConstants';
 
@@ -15,12 +15,16 @@ function informationReducer(state, action) {
         case 'FORM_SERVER_DATA': {
             return { ...state, serverData: action.payload };
         }
+        case 'SET_DATA_LOADING': {
+            return { ...state, isDataLoading: action.payload };
+        }
         case CLEAR_INFORMATION: {
             localStorage.removeItem(INFORMATION);
             return { ...initialState };
         }
         default: {
-            throw new Error(`${UNSUPPORTED_ACTION_TYPE} ${action.type}`);
+            //throw new Error(`${UNSUPPORTED_ACTION_TYPE} ${action.type}`);
+            return state;
         }
     }
 }
@@ -28,6 +32,7 @@ function informationReducer(state, action) {
 const initialState = {
     jsonSchema: null,
     serverData: null,
+    isDataLoading: false,
 };
 
 const localState = JSON.parse(localStorage.getItem(INFORMATION));
