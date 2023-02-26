@@ -63,19 +63,24 @@ const SelectJSONSchema = () => {
         }
     };
 
-    // useEffect(() => {
-
-    //     mergeFormWithData();
-    // }, [formId, isLoading]);
-
     const mergeFormWithData = async () => {
         let newSchemaObject = jsonSchema;
-        //console.log(newSchemaObject);
+
         dispatch({ type: 'SET_DATA_LOADING', payload: true });
         //setDataLoading(true);
         setError(null);
         try {
             const getServerResponseData = await FormManagement.getFormData();
+            // if server has no data to corresponding formId
+            if (getServerResponseData.status === 205) {
+                setMergeSchema(newSchemaObject);
+                dispatch({
+                    type: 'FORM_SERVER_DATA',
+                    payload: newSchemaObject,
+                });
+                dispatch({ type: 'SET_DATA_LOADING', payload: false });
+                return;
+            }
             dispatch({
                 type: 'FORM_SERVER_DATA',
                 payload: getServerResponseData,
@@ -83,30 +88,13 @@ const SelectJSONSchema = () => {
 
             for (let eachQuestionData of getServerResponseData.properties) {
                 const { serial } = eachQuestionData;
-                //console.log(serial - 1);
                 let jsonQuesionDetails = jsonSchema.properties[serial - 1];
-                //console.log(jsonQuesionDetails);
                 let newGridValue = jsonQuesionDetails.gridValue;
-                //console.log(newGridValue);
+
                 for (let gridData of eachQuestionData.gridValue) {
                     const { value, index } = gridData;
-                    //console.log('---> ', id, value, index);
                     newGridValue[index].value = value;
                     newGridValue[index].defaultValue = value;
-                    console.log(value, index);
-
-                    //const newGridObject = [];
-                    // for (let schemaPropertiesQuestion of newSchemaObject.properties) {
-                    //     if (eachQuestionData.id !== schemaPropertiesQuestion.id)
-                    //         continue;
-                    //     for (let gridOfSchema of schemaPropertiesQuestion.gridValue) {
-                    //         if (gridOfSchema.id === id) {
-                    //             gridOfSchema.value = value;
-                    //             gridOfSchema.defaultValue = value;
-                    //             //newGridObject.push(newGridOfSchema);
-                    //         }
-                    //     }
-                    // }
                 }
                 newSchemaObject.properties[serial - 1].gridValue = newGridValue;
             }
