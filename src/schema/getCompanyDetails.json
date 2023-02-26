@@ -1,32 +1,134 @@
 {
-    "data": [
+    "title": "Company Details",
+    "formId": 1,
+    "properties": [
         {
             "id": "companyName",
-            "value": 1
+            "serial": 1,
+            "gridValue": [
+                {
+                    "id": "companyName/1",
+                    "value": "companyName/1",
+                    "index": 0
+                }
+            ]
         },
         {
             "id": "businessName",
-            "value": 2
+            "serial": 2,
+            "gridValue": [
+                {
+                    "id": "businessName/1",
+                    "value": "businessName/1",
+                    "index": 0
+                }
+            ]
         },
         {
             "id": "ownershipAndLegalForm",
-            "value": null
+            "serial": 3,
+            "gridValue": [
+                {
+                    "id": "ownershipAndLegalForm/1",
+                    "value": "ownershipAndLegalForm/1",
+                    "index": 0
+                }
+            ]
         },
         {
             "id": "companyHeadquarterLocation",
-            "value": 4
+            "serial": 4,
+            "gridValue": [
+                {
+                    "id": "companyHeadquarterLocation/1",
+                    "value": "companyHeadquarterLocation/1",
+                    "index": 0
+                }
+            ]
         },
         {
             "id": "countriesOperation",
-            "value": null
+            "serial": 5,
+            "gridValue": [
+                {
+                    "id": "countriesOperation/1",
+                    "value": "countriesOperation/1",
+                    "index": 0
+                }
+            ]
         },
         {
             "id": "organizationEntities",
-            "value": 6
+            "serial": 6,
+            "gridValue": [
+                {
+                    "id": "organizationEntities/1",
+                    "value": "organizationEntities/1",
+                    "index": 0
+                }
+            ]
         },
         {
-            "id": "organizationEntities2",
-            "value": null
+            "id": "employeeValue",
+            "serial": 7,
+            "gridValue": [
+                {
+                    "id": "employeeValue/1",
+                    "value": "employeeValue/1",
+                    "index": 0
+                },
+                {
+                    "id": "employeeValue/2",
+                    "value": "employeeValue/2",
+                    "index": 1
+                },
+                {
+                    "id": "employeeValue/3",
+                    "value": "employeeValue/3",
+                    "index": 2
+                },
+                {
+                    "id": "employeeValue/4",
+                    "value": "employeeValue/4",
+                    "index": 3
+                },
+                {
+                    "id": "employeeValue/5",
+                    "value": "employeeValue/5",
+                    "index": 4
+                }
+            ]
+        },
+        {
+            "id": "ShowGridValue",
+            "serial": 8,
+            "gridValue": [
+                {
+                    "id": "ShowGridValue/1",
+                    "value": "ShowGridValue/1",
+                    "index": 0
+                },
+                {
+                    "id": "ShowGridValue/2",
+                    "value": "ShowGridValue/2",
+                    "index": 1
+                },
+                {
+                    "id": "ShowGridValue/3",
+                    "value": "ShowGridValue/3",
+                    "index": 2
+                },
+                {
+                    "id": "ShowGridValue/4",
+                    "value": "ShowGridValue/4",
+                    "index": 3
+                },
+                {
+                    "id": "ShowGridValue/5",
+                    "value": "ShowGridValue/5",
+                    "index": 4
+                }
+            ]
         }
     ]
 }

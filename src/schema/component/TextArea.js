@@ -1,8 +1,8 @@
-import { Box, Flex, FormControl, FormLabel, Input } from '@chakra-ui/react';
+import { Box, Flex, FormControl, FormLabel, Textarea } from '@chakra-ui/react';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function InputField({ component, register }) {
+const TextArea = ({ component, register }) => {
     return (
         <Box py="10px" pr="10px">
             <FormControl>
@@ -14,7 +14,7 @@ function InputField({ component, register }) {
                     {component.label ? component.label : null}
                 </FormLabel>
                 <Flex direction="column">
-                    <Input
+                    <Textarea
                         {...register(component.id)}
                         autoComplete="off"
                         name={component.id}
@@ -38,11 +38,11 @@ function InputField({ component, register }) {
             </FormControl>
         </Box>
     );
-}
+};
 
-InputField.propTypes = {
+TextArea.propTypes = {
     component: PropTypes.object.isRequired,
     register: PropTypes.func,
 };
 
-export default InputField;
+export default TextArea;

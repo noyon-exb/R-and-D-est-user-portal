@@ -2,7 +2,7 @@ import axios from 'axios';
 import { TOKEN_KEY } from '../constants/basicConstants';
 
 //TODO: will change for every project
-const API_URL = 'PUT_A_SERVER_URL_HERE!';
+const API_URL = 'http://localhost:8085';
 
 const Service = axios.create({
     baseURL: API_URL,
@@ -23,6 +23,7 @@ Service.interceptors.response.use(
     },
     error => {
         const err = error.response;
+        console.log(err);
         return Promise.reject({
             status: err.status,
             message: err.data.message || '',

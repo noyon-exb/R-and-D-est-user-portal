@@ -1,34 +1,29 @@
 import React from 'react';
-import { Box, Button, Flex, Show } from '@chakra-ui/react';
-import { Outlet, useNavigate } from 'react-router-dom';
-import MenubarData from './MenubarData';
+import { Box, Show } from '@chakra-ui/react';
+import { Outlet } from 'react-router-dom';
+import Menubar from './Menubar';
+import Navbar from './Navbar';
 
 function ProtectedRoute() {
-    const navigate = useNavigate();
-
     return (
-        <Box h="100vh" display="flex" overflow="hidden">
-            <Show above="md">
-                <Flex direction="column">
-                    {MenubarData.map((data, index) => {
-                        return (
-                            <Button
-                                key={index}
-                                onClick={() =>
-                                    navigate(data.path, { state: data.x })
-                                }
-                                bg={index % 2 == 0 ? '#e2136e' : 'green'}
-                            >
-                                {data.label}
-                            </Button>
-                        );
-                    })}
-                </Flex>
-            </Show>
-            <Box w="full" px={0} bg="#F2F2F2" overflowY="auto">
-                <Outlet />
+        <>
+            <Box h="100vh" display="flex" overflow="hidden">
+                <Navbar />
+                <Show above="md">
+                    <Menubar />
+                </Show>
+                <Box
+                    w="full"
+                    px={0}
+                    bg="#F2F2F2"
+                    overflow="auto"
+                    mt="65"
+                    pt="4px"
+                >
+                    <Outlet />
+                </Box>
             </Box>
-        </Box>
+        </>
     );
 }
 
