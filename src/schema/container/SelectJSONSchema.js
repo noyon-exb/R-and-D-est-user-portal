@@ -14,7 +14,7 @@ const SelectJSONSchema = () => {
     const [error, setError] = useState(null);
     console.log(error);
     const [mergeSchema, setMergeSchema] = useState(null);
-
+    console.log('mergeSchema: ', mergeSchema);
     useEffect(() => {
         // step 1: if the schema already in context (checked formId), then go to final step 5.
         // step 2: check local storage with formID if found then goto 4th step otherwise step 3
@@ -25,27 +25,27 @@ const SelectJSONSchema = () => {
         let schemaFoundAtLocalStorage = JSON.parse(
             localStorage.getItem(formId)
         );
-        //console.log('in first:', schemaFoundAtLocalStorage);
         setError(null);
         if (schemaFoundAtLocalStorage && !jsonSchema) {
             dispatch({
                 type: 'FORM_SCHEEMA_JSON',
                 payload: schemaFoundAtLocalStorage,
             });
+
             mergeFormWithData(schemaFoundAtLocalStorage);
         } else if (schemaFoundAtLocalStorage) {
             dispatch({
                 type: 'FORM_SCHEEMA_JSON',
                 payload: schemaFoundAtLocalStorage,
             });
+
             mergeFormWithData(schemaFoundAtLocalStorage);
         } else {
-            schemaFoundAtLocalStorage = fetchJsonSchemaFormServer();
-            console.log('44 -> ', schemaFoundAtLocalStorage);
-            mergeFormWithData(schemaFoundAtLocalStorage);
+            fetchJsonSchemaFormServer();
+            // step 1: get form data depends on formId
+            // step 2: mapping get form data with jsonSchema
+            //mergeFormWithData(schemaFoundAtLocalStorage);
         }
-        // step 1: get form data depends on formId
-        // step 2: mapping get form data with jsonSchema
     }, [formId]);
 
     const fetchJsonSchemaFormServer = async () => {
@@ -58,22 +58,18 @@ const SelectJSONSchema = () => {
                 type: 'FORM_SCHEEMA_JSON',
                 payload: response,
             });
-            //dispatch({ type: 'SET_DATA_LOADING', payload: false });
-            return response;
+            mergeFormWithData(response);
+            dispatch({ type: 'SET_DATA_LOADING', payload: false });
         } catch (_err) {
-            console.log(_err);
             setError(_err.message);
-            //dispatch({ type: 'SET_DATA_LOADING', payload: false });
-            return null;
+            dispatch({ type: 'SET_DATA_LOADING', payload: false });
         }
     };
 
     const mergeFormWithData = async schema => {
-        //console.log(schema);
         let newSchemaObject = schema;
 
         dispatch({ type: 'SET_DATA_LOADING', payload: true });
-
         setError(null);
         try {
             const getServerResponseData = await FormManagement.getFormData(
@@ -115,7 +111,6 @@ const SelectJSONSchema = () => {
             dispatch({ type: 'SET_DATA_LOADING', payload: false });
             setError(null);
         } catch (_err) {
-            console.log(_err);
             setError(_err.message);
             dispatch({ type: 'SET_DATA_LOADING', payload: false });
         }
@@ -130,33 +125,23 @@ const SelectJSONSchema = () => {
         );
     }
 
-    // if (error) {
-    //     console.log('Error....');
-    //     console.log(error);
-    //     return (
-    //         <Text justifyContent="center" align="center">
-    //             {error}
-    //         </Text>
-    //     );
-    // }
-
-    if (!isDataLoading && !mergeSchema) {
+    if (error) {
+        console.log('Error....');
+        console.log(error);
         return (
-            <FormContainer
-                jsonSchema={jsonSchema}
-                mergeFormData={() => mergeFormWithData(jsonSchema)}
-            />
+            <Text justifyContent="center" align="center">
+                {error}
+            </Text>
         );
+    }
+
+    if (!mergeSchema) {
+        return <FormContainer jsonSchema={jsonSchema} />;
     }
 
     return (
         <Box>
-            {!isDataLoading && mergeSchema && (
-                <FormContainer
-                    jsonSchema={mergeSchema}
-                    mergeFormData={() => mergeFormWithData(jsonSchema)}
-                />
-            )}
+            <FormContainer jsonSchema={mergeSchema} />
         </Box>
     );
 };

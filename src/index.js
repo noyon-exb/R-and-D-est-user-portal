@@ -1,4 +1,4 @@
-import React, { StrictMode } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './i18n';
@@ -9,13 +9,11 @@ import theme from './theme';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <StrictMode>
-        <BrowserRouter>
-            <ChakraProvider theme={theme}>
-                <InformationProvider>
-                    <App />
-                </InformationProvider>
-            </ChakraProvider>
-        </BrowserRouter>
-    </StrictMode>
+    <BrowserRouter>
+        <ChakraProvider theme={theme}>
+            <InformationProvider>
+                <App />
+            </InformationProvider>
+        </ChakraProvider>
+    </BrowserRouter>
 );
