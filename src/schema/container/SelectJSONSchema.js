@@ -12,10 +12,8 @@ const SelectJSONSchema = () => {
     } = useInformation();
     const { formId } = useParams();
     const [error, setError] = useState(null);
-    // const [isDataLoading, setDataLoading] = useState(false);
+    console.log(error);
     const [mergeSchema, setMergeSchema] = useState(null);
-    console.log(mergeSchema);
-    console.log(isDataLoading);
 
     useEffect(() => {
         // step 1: if the schema already in context (checked formId), then go to final step 5.
@@ -24,53 +22,63 @@ const SelectJSONSchema = () => {
         // step 4: save schema into context
         // step 5: end
 
-        let schemaFoundAtLocalStorage = localStorage.getItem(formId);
+        let schemaFoundAtLocalStorage = JSON.parse(
+            localStorage.getItem(formId)
+        );
+        //console.log('in first:', schemaFoundAtLocalStorage);
         setError(null);
         if (schemaFoundAtLocalStorage && !jsonSchema) {
             dispatch({
                 type: 'FORM_SCHEEMA_JSON',
-                payload: JSON.parse(schemaFoundAtLocalStorage),
+                payload: schemaFoundAtLocalStorage,
             });
+            mergeFormWithData(schemaFoundAtLocalStorage);
         } else if (schemaFoundAtLocalStorage) {
             dispatch({
                 type: 'FORM_SCHEEMA_JSON',
-                payload: JSON.parse(schemaFoundAtLocalStorage),
+                payload: schemaFoundAtLocalStorage,
             });
+            mergeFormWithData(schemaFoundAtLocalStorage);
         } else {
-            fetchJsonSchemaFormServer();
+            schemaFoundAtLocalStorage = fetchJsonSchemaFormServer();
+            console.log('44 -> ', schemaFoundAtLocalStorage);
+            mergeFormWithData(schemaFoundAtLocalStorage);
         }
         // step 1: get form data depends on formId
         // step 2: mapping get form data with jsonSchema
-        mergeFormWithData();
     }, [formId]);
 
     const fetchJsonSchemaFormServer = async () => {
-        dispatch({ type: 'SET_DATA_LOADING', payload: true });
-        //setDataLoading(true);
+        //dispatch({ type: 'SET_DATA_LOADING', payload: true });
+
         try {
-            const response = await FormManagement.getForm();
+            const response = await FormManagement.getForm(formId);
             localStorage.setItem(response.formId, JSON.stringify(response));
             dispatch({
                 type: 'FORM_SCHEEMA_JSON',
                 payload: response,
             });
-            dispatch({ type: 'SET_DATA_LOADING', payload: false });
-            //setDataLoading(false);
+            //dispatch({ type: 'SET_DATA_LOADING', payload: false });
+            return response;
         } catch (_err) {
+            console.log(_err);
             setError(_err.message);
-            dispatch({ type: 'SET_DATA_LOADING', payload: false });
-            //setDataLoading(false);
+            //dispatch({ type: 'SET_DATA_LOADING', payload: false });
+            return null;
         }
     };
 
-    const mergeFormWithData = async () => {
-        let newSchemaObject = jsonSchema;
+    const mergeFormWithData = async schema => {
+        //console.log(schema);
+        let newSchemaObject = schema;
 
         dispatch({ type: 'SET_DATA_LOADING', payload: true });
-        //setDataLoading(true);
+
         setError(null);
         try {
-            const getServerResponseData = await FormManagement.getFormData();
+            const getServerResponseData = await FormManagement.getFormData(
+                formId
+            );
             // if server has no data to corresponding formId
             if (getServerResponseData.status === 205) {
                 setMergeSchema(newSchemaObject);
@@ -88,7 +96,7 @@ const SelectJSONSchema = () => {
 
             for (let eachQuestionData of getServerResponseData.properties) {
                 const { serial } = eachQuestionData;
-                let jsonQuesionDetails = jsonSchema.properties[serial - 1];
+                let jsonQuesionDetails = schema.properties[serial - 1];
                 let newGridValue = jsonQuesionDetails.gridValue;
 
                 for (let gridData of eachQuestionData.gridValue) {
@@ -105,16 +113,16 @@ const SelectJSONSchema = () => {
                 payload: newSchemaObject,
             });
             dispatch({ type: 'SET_DATA_LOADING', payload: false });
-            //setDataLoading(false);
+            setError(null);
         } catch (_err) {
+            console.log(_err);
             setError(_err.message);
             dispatch({ type: 'SET_DATA_LOADING', payload: false });
-            //setDataLoading(false);
         }
     };
 
-    if (isDataLoading) {
-        console.log('loaded....');
+    if (isDataLoading || !jsonSchema) {
+        console.log('loading....');
         return (
             <Text justifyContent="center" align="center">
                 {'Loading......'}
@@ -122,17 +130,34 @@ const SelectJSONSchema = () => {
         );
     }
 
-    if (error) {
-        console.log('error....');
+    // if (error) {
+    //     console.log('Error....');
+    //     console.log(error);
+    //     return (
+    //         <Text justifyContent="center" align="center">
+    //             {error}
+    //         </Text>
+    //     );
+    // }
+
+    if (!isDataLoading && !mergeSchema) {
         return (
-            <Text justifyContent="center" align="center">
-                {error}
-            </Text>
+            <FormContainer
+                jsonSchema={jsonSchema}
+                mergeFormData={() => mergeFormWithData(jsonSchema)}
+            />
         );
     }
 
     return (
-        <Box>{mergeSchema && <FormContainer jsonSchema={mergeSchema} />}</Box>
+        <Box>
+            {!isDataLoading && mergeSchema && (
+                <FormContainer
+                    jsonSchema={mergeSchema}
+                    mergeFormData={() => mergeFormWithData(jsonSchema)}
+                />
+            )}
+        </Box>
     );
 };
 

@@ -66,8 +66,6 @@ function FormContainer({ jsonSchema }) {
         setPageNo(prev => prev - 1);
     };
 
-    //useEffect(() => {}, [pageNo]);
-
     return (
         <Flex w="100%" direction="column" px="40px">
             <PageLayout
@@ -182,6 +180,7 @@ function FormContainer({ jsonSchema }) {
 
 FormContainer.propTypes = {
     jsonSchema: PropTypes.object,
+    mergeFormData: PropTypes.func,
 };
 
 export default FormContainer;

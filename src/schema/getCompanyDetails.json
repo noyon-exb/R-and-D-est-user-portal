@@ -1,6 +1,6 @@
 {
     "title": "Company Details",
-    "formId": 1,
+    "formId": 2,
     "properties": [
         {
             "id": "companyName",
@@ -101,7 +101,7 @@
         },
         {
             "id": "ShowGridValue",
-            "serial": 8,
+            "serial": 2,
             "gridValue": [
                 {
                     "id": "ShowGridValue/1",

@@ -23,7 +23,6 @@ Service.interceptors.response.use(
     },
     error => {
         const err = error.response;
-        console.log(err);
         return Promise.reject({
             status: err.status,
             message: err.data.message || '',
