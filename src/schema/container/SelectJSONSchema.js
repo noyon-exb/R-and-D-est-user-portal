@@ -12,9 +12,7 @@ const SelectJSONSchema = () => {
     } = useInformation();
     const { formId } = useParams();
     const [error, setError] = useState(null);
-    console.log(error);
     const [mergeSchema, setMergeSchema] = useState(null);
-    console.log('mergeSchema: ', mergeSchema);
     useEffect(() => {
         // step 1: if the schema already in context (checked formId), then go to final step 5.
         // step 2: check local storage with formID if found then goto 4th step otherwise step 3
@@ -42,14 +40,11 @@ const SelectJSONSchema = () => {
             mergeFormWithData(schemaFoundAtLocalStorage);
         } else {
             fetchJsonSchemaFormServer();
-            // step 1: get form data depends on formId
-            // step 2: mapping get form data with jsonSchema
-            //mergeFormWithData(schemaFoundAtLocalStorage);
         }
     }, [formId]);
 
     const fetchJsonSchemaFormServer = async () => {
-        //dispatch({ type: 'SET_DATA_LOADING', payload: true });
+        dispatch({ type: 'SET_DATA_LOADING', payload: true });
 
         try {
             const response = await FormManagement.getForm(formId);
@@ -58,6 +53,8 @@ const SelectJSONSchema = () => {
                 type: 'FORM_SCHEEMA_JSON',
                 payload: response,
             });
+            // step 1: get form data depends on formId
+            // step 2: mapping get form data with jsonSchema
             mergeFormWithData(response);
             dispatch({ type: 'SET_DATA_LOADING', payload: false });
         } catch (_err) {

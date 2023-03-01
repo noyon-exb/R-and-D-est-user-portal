@@ -1,4 +1,12 @@
-import { Box, Button, Flex, Grid, GridItem, Spacer } from '@chakra-ui/react';
+import {
+    Box,
+    Button,
+    Flex,
+    Grid,
+    GridItem,
+    Spacer,
+    Text,
+} from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
@@ -6,56 +14,71 @@ import QuestionHeading from '../component/QuestionHeading';
 import SelectedComponent from '../component/SelectedComponent';
 import PageLayout from '../component/PageLayout';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
+import { useInformation } from '../../contexts/informationContext';
+import FormManagement from '../../apiservices/form-management';
 
 function FormContainer({ jsonSchema }) {
+    const {
+        state: { serverData, isDataLoading },
+        dispatch,
+    } = useInformation();
+
     const components = jsonSchema.properties;
     const questionPerPage = jsonSchema.questionPerPage;
     const totalQuestion = jsonSchema.properties.length;
     const totalPage = Math.ceil(totalQuestion / questionPerPage);
     const [pageNo, setPageNo] = useState(0);
+    const nextButtonRenderCondition =
+        pageNo >= 0 &&
+        (pageNo + 1) * questionPerPage <
+            totalQuestion -
+                (totalQuestion % questionPerPage) +
+                (totalQuestion % questionPerPage) >
+            0;
 
-    const { handleSubmit, register } = useForm({
+    const { handleSubmit, register, setValue } = useForm({
         mode: 'all',
     });
 
-    const onSubmit = values => {
-        console.log(values);
-        let requestObject = {};
-        //no need this map
-        components.map(data => {
-            requestObject[data.id] = values[data.id];
-        });
+    const makeRequestPayload = (payload, inputValues) => {
+        let newRequestPayload = { ...payload, properties: payload.properties };
 
-        // let newObject = components;
-        // for (let component of components) {
-        //     for (let val in values) {
-        //         if (val === component.id) {
-        //             component.value = values[val];
-        //         }
-        //         newObject[component.serial - 1] = component;
-        //     }
-        // }
-        // //console.log(newObject);
+        for (let inputKey in inputValues) {
+            const inputValue = inputValues[inputKey];
+            for (let dataKey of payload.properties) {
+                const { serial } = dataKey;
 
-        let serverRequestPayload = { data: [] };
+                if (inputKey.split('/')[0] !== dataKey.id.split('/')[0]) {
+                    continue;
+                }
 
-        for (let component of components) {
-            for (let key in values) {
-                if (key === component.id) {
-                    // serverRequestPayload.data = {
-                    //     ...serverRequestPayload.data,
-                    //     key: values[key],
-                    // };
+                for (let gridKey of dataKey.gridValue) {
+                    const { id, index } = gridKey;
 
-                    serverRequestPayload.data.push({
-                        id: key,
-                        value: values[key],
-                    });
+                    if (id === inputKey) {
+                        newRequestPayload.properties[serial - 1].gridValue[
+                            index
+                        ] = {
+                            ...gridKey,
+                            value: inputValue,
+                        };
+                    }
                 }
             }
         }
+        return newRequestPayload;
+    };
 
-        console.log(serverRequestPayload);
+    const onSubmit = async values => {
+        const payload = makeRequestPayload(serverData, values);
+        dispatch({ type: 'SET_DATA_LOADING', payload: true });
+        try {
+            const response = await FormManagement.submitFormData(payload);
+            console.log(response.message);
+            dispatch({ type: 'SET_DATA_LOADING', payload: false });
+        } catch (_err) {
+            dispatch({ type: 'SET_DATA_LOADING', payload: false });
+        }
     };
 
     const increasePageNoHandler = () => {
@@ -65,6 +88,15 @@ function FormContainer({ jsonSchema }) {
     const decreasePageNoHandler = () => {
         setPageNo(prev => prev - 1);
     };
+
+    if (isDataLoading) {
+        console.log('loading....');
+        return (
+            <Text justifyContent="center" align="center">
+                {'Loading......'}
+            </Text>
+        );
+    }
 
     return (
         <Flex w="100%" direction="column" px="40px">
@@ -82,7 +114,6 @@ function FormContainer({ jsonSchema }) {
                             index <=
                                 pageNo * questionPerPage + questionPerPage - 1
                         ) {
-                            const templateColumns = `repeat(${comp.col}, 1fr)`;
                             return (
                                 <Box key={index} py="20px">
                                     <QuestionHeading
@@ -91,7 +122,9 @@ function FormContainer({ jsonSchema }) {
                                         tooltipText={comp.tooltipText}
                                         description={comp.description}
                                     />
-                                    <Grid templateColumns={templateColumns}>
+                                    <Grid
+                                        templateColumns={`repeat(${comp.col}, 1fr)`}
+                                    >
                                         {comp.gridValue.map((grid, index2) => {
                                             return (
                                                 <GridItem
@@ -102,6 +135,7 @@ function FormContainer({ jsonSchema }) {
                                                         type={grid.type}
                                                         component={grid}
                                                         register={register}
+                                                        setValue={setValue}
                                                     />
                                                 </GridItem>
                                             );
@@ -114,9 +148,8 @@ function FormContainer({ jsonSchema }) {
 
                     <Flex>
                         <Spacer />
-                        {pageNo > 0 ? (
+                        {pageNo ? (
                             <Button
-                                type="submit"
                                 mt="30px"
                                 mr="30px"
                                 w="100px"
@@ -132,13 +165,8 @@ function FormContainer({ jsonSchema }) {
                                 Cancel
                             </Button>
                         ) : null}
-                        {pageNo >= 0 &&
-                        (pageNo + 1) * questionPerPage <
-                            totalQuestion -
-                                (totalQuestion % questionPerPage) +
-                                1 ? (
+                        {nextButtonRenderCondition ? (
                             <Button
-                                //type="submit"
                                 mt="30px"
                                 mr="10px"
                                 w="133px"

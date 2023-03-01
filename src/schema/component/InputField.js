@@ -2,7 +2,7 @@ import { Box, Flex, FormControl, FormLabel, Input } from '@chakra-ui/react';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function InputField({ component, register }) {
+function InputField({ component, register, setValue }) {
     return (
         <Box py="10px" pr="10px">
             <FormControl>
@@ -20,6 +20,10 @@ function InputField({ component, register }) {
                         name={component.id}
                         type={component.textType}
                         defaultValue={component.defaultValue}
+                        //value={component.value}
+                        onChange={e => {
+                            setValue(component.id, e.target.value);
+                        }}
                         placeholder={component.placeholder}
                         _placeholder={{
                             fontSize: '14px',
@@ -43,6 +47,7 @@ function InputField({ component, register }) {
 InputField.propTypes = {
     component: PropTypes.object.isRequired,
     register: PropTypes.func,
+    setValue: PropTypes.func,
 };
 
 export default InputField;

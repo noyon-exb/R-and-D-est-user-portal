@@ -14,4 +14,11 @@ export default class FormManagement {
             }
         );
     }
+
+    static async submitFormData(payload) {
+        return Service.post(`/submit-form`, payload).then(response => {
+            console.log(response);
+            return response.data;
+        });
+    }
 }

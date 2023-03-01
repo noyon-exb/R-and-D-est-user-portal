@@ -1,6 +1,6 @@
 {
     "title": "Company Details 2",
-    "formId": 1,
+    "formId": 2,
     "questionPerPage": 3,
     "type": "form",
     "properties": [
@@ -68,7 +68,7 @@
             ]
         },
         {
-            "id": "ShowGridValue",
+            "id": "showGridValue",
             "serial": 2,
             "heading": "Organization Grid input",
             "description": "List of all grid",
@@ -77,7 +77,7 @@
             "col": 3,
             "gridValue": [
                 {
-                    "id": "ShowGridValue/1",
+                    "id": "showGridValue/1",
                     "index": 0,
                     "type": "textarea",
                     "textType": "text",
@@ -87,7 +87,7 @@
                     "value": null
                 },
                 {
-                    "id": "ShowGridValue/2",
+                    "id": "showGridValue/2",
                     "index": 1,
                     "type": "input",
                     "placeholder": "First name",
@@ -98,7 +98,7 @@
                     "value": null
                 },
                 {
-                    "id": "ShowGridValue/3",
+                    "id": "showGridValue/3",
                     "index": 2,
                     "type": "input",
                     "placeholder": "Middle name",
@@ -109,7 +109,7 @@
                     "value": null
                 },
                 {
-                    "id": "ShowGridValue/4",
+                    "id": "showGridValue/4",
                     "index": 3,
                     "type": "input",
                     "placeholder": "Last name",
@@ -120,7 +120,7 @@
                     "value": null
                 },
                 {
-                    "id": "ShowGridValue/5",
+                    "id": "showGridValue/5",
                     "index": 4,
                     "type": "input",
                     "placeholder": "Address",
