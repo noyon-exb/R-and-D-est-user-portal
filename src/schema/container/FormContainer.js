@@ -165,7 +165,7 @@ function FormContainer({ jsonSchema }) {
                                 Cancel
                             </Button>
                         ) : null}
-                        {nextButtonRenderCondition ? (
+                        {nextButtonRenderCondition && (
                             <Button
                                 mt="30px"
                                 mr="10px"
@@ -182,7 +182,8 @@ function FormContainer({ jsonSchema }) {
                             >
                                 Next page
                             </Button>
-                        ) : (
+                        )}
+                        {!nextButtonRenderCondition && (
                             <Button
                                 type="submit"
                                 mt="30px"
@@ -194,6 +195,7 @@ function FormContainer({ jsonSchema }) {
                                 fontWeight={500}
                                 border="1px solid"
                                 borderRadius="8px"
+                                disabled={nextButtonRenderCondition}
                                 _hover={{ bg: '#4DA467 !important' }}
                             >
                                 Save &amp; Sumbit
